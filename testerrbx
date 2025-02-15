@@ -1,0 +1,67 @@
+while true do
+    -- Cast Bladder
+    local args1 = {
+        "CastBladder",
+        game:GetService("Players").LocalPlayer.Character.Weapon,
+        "F79699C5BA024951",
+        {},
+        {}
+    }
+    game:GetService("ReplicatedStorage").Remotes.Fish.RodBroadcast:FireServer(unpack(args1))
+
+    -- Cast Action
+    local args2 = {
+        "Cast",
+        { ["pos"] = Vector3.new(-102.84042358398438, 47.999996185302734, -253.4630126953125) }
+    }
+    game:GetService("ReplicatedStorage").Remotes.Fish.ActionCmd:FireServer(unpack(args2))
+
+    -- Add Fish
+    local args3 = {
+        "AddFish",
+        game:GetService("Players").LocalPlayer.Character.Weapon,
+        {
+            { ["id"] = 141003, ["num"] = 1 },
+            { ["id"] = 1101, ["num"] = 100 }
+        }
+    }
+    game:GetService("ReplicatedStorage").Remotes.Fish.RodBroadcast:FireServer(unpack(args3))
+
+    -- Pull Action
+    local args4 = { "Pull" }
+    game:GetService("ReplicatedStorage").Remotes.Fish.ActionCmd:FireServer(unpack(args4))
+
+    -- Get Nil Instance Function
+    function getNil(name, class)
+        for _, v in pairs(getnilinstances()) do
+            if v.ClassName == class and v.Name == name then
+                return v
+            end
+        end
+    end
+
+    -- Add Fish with Nil Instance
+    local args5 = {
+        "AddFish",
+        getNil("firefoxxyypets", "Model").Weapon,
+        {
+            { ["id"] = 141003, ["num"] = 1 },
+            { ["id"] = 1101, ["num"] = 100 }
+        }
+    }
+    game:GetService("ReplicatedStorage").Remotes.Fish.RodBroadcast:FireServer(unpack(args5))
+
+    -- Click Stamp Action
+    local args6 = { { ["clickStamp"] = os.time() } }
+    game:GetService("ReplicatedStorage").Remotes.Fish.GameSendCmd:FireServer(unpack(args6))
+
+    -- Collect Blader
+    local args7 = {
+        "CollectBlader",
+        game:GetService("Players").LocalPlayer.Character.Weapon
+    }
+    game:GetService("ReplicatedStorage").Remotes.Fish.RodBroadcast:FireServer(unpack(args7))
+
+    -- Delay to prevent excessive requests (adjust as needed)
+    wait(2) 
+end
